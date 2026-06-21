@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudSec-Sentinel — Interactive Security Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="glow-bg"></div>
+  
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <span class="icon">🛡️</span>
+      <span class="text">CLOUDSEC<span class="highlight">-SENTINEL</span></span>
+    </div>
+    <div class="header-meta">
+      <span class="badge">SECURE PIPELINE ACTIVATED</span>
+      <span class="user">@cidtechmm002</span>
+    </div>
+  </header>
+
+  <main class="dashboard-grid">
+    
+    <!-- Left Column: Stats & Upload -->
+    <section class="left-panel">
+      <!-- Score Circle Card -->
+      <div class="glass-card score-card">
+        <h3>Cyber Security Score</h3>
+        <div class="score-container">
+          <svg class="progress-ring" width="200" height="200">
+            <circle class="progress-ring__circle-bg" stroke="#101827" stroke-width="12" fill="transparent" r="80" cx="100" cy="100"/>
+            <circle class="progress-ring__circle" stroke="url(#gradient)" stroke-width="12" stroke-linecap="round" fill="transparent" r="80" cx="100" cy="100"/>
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#06b6d4" />
+                <stop offset="100%" stop-color="#3b82f6" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="score-display">
+            <span class="score-number" id="scoreNumber">100</span>
+            <span class="score-label" id="scoreLabel">EXCELLENT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Threat Severities -->
+      <div class="severity-grid">
+        <div class="severity-card critical" data-severity="critical">
+          <div class="badge-icon">🛑</div>
+          <span class="number" id="countCritical">0</span>
+          <span class="label">Critical</span>
+        </div>
+        <div class="severity-card high" data-severity="high">
+          <div class="badge-icon">🔥</div>
+          <span class="number" id="countHigh">0</span>
+          <span class="label">High</span>
+        </div>
+        <div class="severity-card medium" data-severity="medium">
+          <div class="badge-icon">⚠️</div>
+          <span class="number" id="countMedium">0</span>
+          <span class="label">Medium</span>
+        </div>
+        <div class="severity-card low" data-severity="low">
+          <div class="badge-icon">⚙️</div>
+          <span class="number" id="countLow">0</span>
+          <span class="label">Low</span>
+        </div>
+      </div>
+
+      <!-- File Drop Zone -->
+      <div class="glass-card drop-zone" id="dropZone">
+        <div class="upload-icon">📤</div>
+        <h3>Drop File or Click to Upload</h3>
+        <p>Supported: Dockerfile, docker-compose.yml, nginx.conf, deployment.yaml, *.tf</p>
+        <input type="file" id="fileInput" style="display: none;">
+        <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">Browse File</button>
+      </div>
+
+      <!-- Sample Templates Selector -->
+      <div class="glass-card template-selector">
+        <h3>Test with a vulnerable template:</h3>
+        <div class="btn-group">
+          <button class="btn btn-sm" onclick="loadTemplate('docker')">Dockerfile</button>
+          <button class="btn btn-sm" onclick="loadTemplate('compose')">Docker Compose</button>
+          <button class="btn btn-sm" onclick="loadTemplate('nginx')">Nginx Config</button>
+          <button class="btn btn-sm" onclick="loadTemplate('k8s')">K8s Deployment</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column: Audits & Diffs -->
+    <section class="right-panel">
+      <!-- Findings Summary List -->
+      <div class="glass-card findings-card">
+        <div class="card-header">
+          <h3>Detected Vulnerabilities</h3>
+          <span class="findings-count" id="findingsCount">0 Issues Found</span>
+        </div>
+        <div class="findings-list" id="findingsList">
+          <div class="empty-state">
+            <span class="icon">🛡️</span>
+            <p>Upload a file or choose a template to run the SecOps audit check.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Diff Viewer -->
+      <div class="glass-card diff-card">
+        <div class="card-header">
+          <h3>Diff Viewer & Remediation Patch</h3>
+          <button class="btn btn-primary" id="downloadBtn" style="display: none;" onclick="downloadRemediation()">Download Secure Files</button>
+        </div>
+        <div class="diff-container" id="diffContainer" style="display: none;">
+          <div class="code-panel vulnerable">
+            <div class="panel-header">VULNERABLE CONFIGURATION</div>
+            <pre><code id="codeVulnerable"></code></pre>
+          </div>
+          <div class="code-panel hardened">
+            <div class="panel-header">SECURE HARDENED CONFIGURATION</div>
+            <pre><code id="codeHardened"></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>CloudSec-Sentinel &copy; 2026. Built with Claude Code AI integration.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
