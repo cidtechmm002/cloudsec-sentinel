@@ -4,7 +4,8 @@
 
 CloudSec-Sentinel is a DevSecOps auditing tool designed to scan configuration files (Docker, Docker Compose, Kubernetes, and Nginx) for security vulnerabilities, compliance drift, and hardcoded threats. It generates high-fidelity compliance scores, vulnerability logs, and automated bash/configuration patching scripts.
 
-![Dashboard Preview](assets/dashboard_preview.png)
+![Dashboard Preview](assets/dashboard_screenshot_1.png)
+![Diff and Patching Panel](assets/dashboard_screenshot_2.png)
 
 ## 🌟 Key Features
 
